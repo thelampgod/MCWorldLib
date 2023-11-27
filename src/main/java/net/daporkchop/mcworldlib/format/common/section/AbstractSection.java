@@ -61,7 +61,7 @@ public abstract class AbstractSection extends AbstractRefCounted implements Sect
     protected final int y;
     protected final int z;
 
-    public AbstractSection(@NonNull MinecraftVersion version, int x, int y, int z, @NonNull NibbleArray blockLight, NibbleArray skyLight) {
+    public AbstractSection(@NonNull MinecraftVersion version, int x, int y, int z, NibbleArray blockLight, NibbleArray skyLight) {
         this.blockLight = blockLight;
         this.skyLight = skyLight;
 

@@ -35,7 +35,7 @@ import net.daporkchop.mcworldlib.world.storage.FlattenedBlockStorage;
 public class SingleLayerFlattenedSection extends AbstractSection implements FlattenedSection {
     protected final FlattenedBlockStorage blocks;
 
-    public SingleLayerFlattenedSection(MinecraftVersion version, int x, int y, int z, @NonNull FlattenedBlockStorage blocks, @NonNull NibbleArray blockLight, NibbleArray skyLight) {
+    public SingleLayerFlattenedSection(MinecraftVersion version, int x, int y, int z, @NonNull FlattenedBlockStorage blocks, NibbleArray blockLight, NibbleArray skyLight) {
         super(version, x, y, z, blockLight, skyLight);
 
         this.blocks = blocks;

@@ -78,7 +78,7 @@ public abstract class AnvilCachedChunk extends AbstractReleasableDirtiable {
             CompoundTag levelTag = levelDecoder.decode(tag, version);
 
             JavaSectionDecoder sectionDecoder = fixers.section().ceilingEntry(version).getValue();
-            for (CompoundTag sectionTag : levelTag.getList("Sections", CompoundTag.class)) {
+            for (CompoundTag sectionTag : levelTag.getList((version.compareTo(JavaVersion.fromName("1.19.4")) < 0 ? "Sections" : "sections"), CompoundTag.class)) {
                 Section section = sectionDecoder.decode(sectionTag, version, world, this.chunk.x(), this.chunk.z());
                 checkState(this.sections[section.y()] == null, "duplicate section at y=%d!", section.y());
                 this.sections[section.y()] = section;

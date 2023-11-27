@@ -34,6 +34,7 @@ import net.daporkchop.mcworldlib.format.java.decoder.level.LevelDecoder1_19_4;
 import net.daporkchop.mcworldlib.format.java.decoder.section.LegacySectionDecoder;
 import net.daporkchop.mcworldlib.format.java.decoder.section.PackedFlattenedSectionDecoder;
 import net.daporkchop.mcworldlib.format.java.decoder.section.PaddedFlattenedSectionDecoder;
+import net.daporkchop.mcworldlib.format.java.decoder.section.SectionDecoder1_19_4;
 import net.daporkchop.mcworldlib.version.java.JavaVersion;
 
 import java.util.Map;
@@ -86,6 +87,7 @@ public class JavaFixers {
                         .put(LegacySectionDecoder.VERSION, new LegacySectionDecoder())
                         .put(PackedFlattenedSectionDecoder.VERSION, new PackedFlattenedSectionDecoder())
                         .put(PaddedFlattenedSectionDecoder.VERSION, new PaddedFlattenedSectionDecoder())
+                        .put(SectionDecoder1_19_4.VERSION, new SectionDecoder1_19_4())
                         .build(),
                 new MapBuilder<>(new TreeMap<JavaVersion, JavaLevelDecoder>())
                         .put(LegacyLevelDecoder.VERSION, new LegacyLevelDecoder())
