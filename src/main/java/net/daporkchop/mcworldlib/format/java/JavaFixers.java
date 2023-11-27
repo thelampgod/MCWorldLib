@@ -23,10 +23,14 @@ package net.daporkchop.mcworldlib.format.java;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import net.daporkchop.mcworldlib.format.anvil.decoder.chunk.ChunkDecoder_1_19_4;
 import net.daporkchop.mcworldlib.format.anvil.decoder.chunk.FlattenedChunkDecoder;
 import net.daporkchop.mcworldlib.format.anvil.decoder.chunk.LegacyChunkDecoder;
 import net.daporkchop.mcworldlib.format.java.decoder.JavaChunkDecoder;
+import net.daporkchop.mcworldlib.format.java.decoder.JavaLevelDecoder;
 import net.daporkchop.mcworldlib.format.java.decoder.JavaSectionDecoder;
+import net.daporkchop.mcworldlib.format.java.decoder.level.LegacyLevelDecoder;
+import net.daporkchop.mcworldlib.format.java.decoder.level.LevelDecoder1_19_4;
 import net.daporkchop.mcworldlib.format.java.decoder.section.LegacySectionDecoder;
 import net.daporkchop.mcworldlib.format.java.decoder.section.PackedFlattenedSectionDecoder;
 import net.daporkchop.mcworldlib.format.java.decoder.section.PaddedFlattenedSectionDecoder;
@@ -53,6 +57,8 @@ public class JavaFixers {
     protected final NavigableMap<JavaVersion, JavaChunkDecoder> chunk;
     @NonNull
     protected final NavigableMap<JavaVersion, JavaSectionDecoder> section;
+    @NonNull
+    protected final NavigableMap<JavaVersion, JavaLevelDecoder> level;
 
     @RequiredArgsConstructor
     public static final class MapBuilder<K, V, M extends Map<K, V>> {
@@ -74,11 +80,16 @@ public class JavaFixers {
                 new MapBuilder<>(new TreeMap<JavaVersion, JavaChunkDecoder>())
                         .put(LegacyChunkDecoder.VERSION, new LegacyChunkDecoder())
                         .put(FlattenedChunkDecoder.VERSION, new FlattenedChunkDecoder())
+                        .put(ChunkDecoder_1_19_4.VERSION, new ChunkDecoder_1_19_4())
                         .build(),
                 new MapBuilder<>(new TreeMap<JavaVersion, JavaSectionDecoder>())
                         .put(LegacySectionDecoder.VERSION, new LegacySectionDecoder())
                         .put(PackedFlattenedSectionDecoder.VERSION, new PackedFlattenedSectionDecoder())
                         .put(PaddedFlattenedSectionDecoder.VERSION, new PaddedFlattenedSectionDecoder())
+                        .build(),
+                new MapBuilder<>(new TreeMap<JavaVersion, JavaLevelDecoder>())
+                        .put(LegacyLevelDecoder.VERSION, new LegacyLevelDecoder())
+                        .put(LevelDecoder1_19_4.VERSION, new LevelDecoder1_19_4())
                         .build());
     }
 }

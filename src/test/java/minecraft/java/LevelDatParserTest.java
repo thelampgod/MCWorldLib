@@ -56,7 +56,8 @@ public class LevelDatParserTest {
     public static final String[] VERSIONS = {
             "1_8_9",
             "1_12_2",
-            "1_13_2"
+            "1_13_2",
+            "1_19_4"
     };
 
     @BeforeClass

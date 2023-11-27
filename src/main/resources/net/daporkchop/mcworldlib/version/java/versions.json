@@ -1,5 +1,15 @@
 [
   {
+    "name": "1.20.1",
+    "protocol": 763,
+    "data": 3465
+  },
+  {
+    "name": "1.19.4",
+    "protocol": 762,
+    "data": 3337
+  },
+  {
     "name": "Combat Test 8c",
     "protocol": 803,
     "data": 2707

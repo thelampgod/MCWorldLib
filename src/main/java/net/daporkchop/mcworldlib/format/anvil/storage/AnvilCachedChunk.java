@@ -25,6 +25,7 @@ import net.daporkchop.lib.nbt.tag.CompoundTag;
 import net.daporkchop.lib.nbt.tag.DoubleTag;
 import net.daporkchop.lib.nbt.tag.ListTag;
 import net.daporkchop.mcworldlib.format.java.JavaFixers;
+import net.daporkchop.mcworldlib.format.java.decoder.JavaLevelDecoder;
 import net.daporkchop.mcworldlib.format.java.decoder.JavaSectionDecoder;
 import net.daporkchop.mcworldlib.util.dirty.AbstractReleasableDirtiable;
 import net.daporkchop.mcworldlib.util.nbt.AllocatedNBTHelper;
@@ -73,7 +74,8 @@ public abstract class AnvilCachedChunk extends AbstractReleasableDirtiable {
             this.chunk = fixers.chunk().ceilingEntry(version).getValue()
                     .decode(tag, version, world);
 
-            CompoundTag levelTag = tag.getCompound("Level");
+            JavaLevelDecoder levelDecoder = fixers.level().ceilingEntry(version).getValue();
+            CompoundTag levelTag = levelDecoder.decode(tag, version);
 
             JavaSectionDecoder sectionDecoder = fixers.section().ceilingEntry(version).getValue();
             for (CompoundTag sectionTag : levelTag.getList("Sections", CompoundTag.class)) {

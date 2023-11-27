@@ -35,7 +35,7 @@ import net.daporkchop.mcworldlib.world.storage.FlattenedBlockStorage;
  * @author DaPorkchop_
  */
 public class PaddedFlattenedSectionDecoder extends PackedFlattenedSectionDecoder {
-    public static final JavaVersion VERSION = JavaVersion.latest();
+    public static final JavaVersion VERSION = JavaVersion.fromName("1.16.1");
 
     @Override
     protected FlattenedBlockStorage parseBlockStorage(@NonNull CompoundTag tag) {

@@ -21,7 +21,6 @@
 package net.daporkchop.mcworldlib.format.anvil.decoder.chunk;
 
 import lombok.NonNull;
-import net.daporkchop.mcworldlib.save.SaveOptions;
 import net.daporkchop.mcworldlib.version.java.JavaVersion;
 import net.daporkchop.mcworldlib.world.Chunk;
 import net.daporkchop.mcworldlib.world.World;
@@ -33,7 +32,7 @@ import net.daporkchop.lib.nbt.tag.CompoundTag;
  * @author DaPorkchop_
  */
 public class FlattenedChunkDecoder extends LegacyChunkDecoder {
-    public static final JavaVersion VERSION = JavaVersion.latest();
+    public static final JavaVersion VERSION = JavaVersion.fromName("1.16.1");
 
     @Override
     public Chunk decode(@NonNull CompoundTag tag, @NonNull JavaVersion version, @NonNull World world) {
