@@ -76,22 +76,23 @@ public abstract class AnvilCachedChunk extends AbstractReleasableDirtiable {
 
             JavaLevelDecoder levelDecoder = fixers.level().ceilingEntry(version).getValue();
             CompoundTag levelTag = levelDecoder.decode(tag, version);
+            boolean newNames = version.compareTo(JavaVersion.fromName("1.19.4")) >= 0;
 
             JavaSectionDecoder sectionDecoder = fixers.section().ceilingEntry(version).getValue();
-            for (CompoundTag sectionTag : levelTag.getList((version.compareTo(JavaVersion.fromName("1.19.4")) < 0 ? "Sections" : "sections"), CompoundTag.class)) {
+            for (CompoundTag sectionTag : levelTag.getList((newNames ? "sections" : "Sections"), CompoundTag.class)) {
                 Section section = sectionDecoder.decode(sectionTag, version, world, this.chunk.x(), this.chunk.z());
                 checkState(this.sections[section.y()] == null, "duplicate section at y=%d!", section.y());
                 this.sections[section.y()] = section;
             }
 
-//            ListTag<CompoundTag> tileEntities = levelTag.getList("TileEntities", CompoundTag.class);
-//            for (CompoundTag tileEntity : tileEntities) {
-//                int x = tileEntity.getInt("x");
-//                int y = tileEntity.getInt("y");
-//                int z = tileEntity.getInt("z");
-//                this.sections[y >> 4].setTileEntity(x & 0xF, y & 0xF, z & 0xF, AllocatedNBTHelper.toNormalAndRelease(tileEntity));
-//            }
-//            tileEntities.list().clear();
+            ListTag<CompoundTag> tileEntities = levelTag.getList((newNames ? "block_entities" : "TileEntities"), CompoundTag.class);
+            for (CompoundTag tileEntity : tileEntities) {
+                int x = tileEntity.getInt("x");
+                int y = tileEntity.getInt("y");
+                int z = tileEntity.getInt("z");
+                this.sections[y >> 4].setTileEntity(x & 0xF, y & 0xF, z & 0xF, AllocatedNBTHelper.toNormalAndRelease(tileEntity));
+            }
+            tileEntities.list().clear();
 
 //            //TODO: i should probably make entities be their own thing, because 1.17 stores them separately
 //            ListTag<CompoundTag> entities = levelTag.getList("Entities", CompoundTag.class);
