@@ -68,7 +68,7 @@ public abstract class AnvilCachedChunk extends AbstractReleasableDirtiable {
 
     public static class ReadOnly extends AnvilCachedChunk {
         protected final Chunk chunk;
-        protected final Section[] sections = new Section[16];
+        protected final Section[] sections = new Section[24];
 
         public ReadOnly(@NonNull CompoundTag tag, @NonNull JavaVersion version, @NonNull JavaFixers fixers, @NonNull World world) {
             this.chunk = fixers.chunk().ceilingEntry(version).getValue()
@@ -84,24 +84,24 @@ public abstract class AnvilCachedChunk extends AbstractReleasableDirtiable {
                 this.sections[section.y()] = section;
             }
 
-            ListTag<CompoundTag> tileEntities = levelTag.getList("TileEntities", CompoundTag.class);
-            for (CompoundTag tileEntity : tileEntities) {
-                int x = tileEntity.getInt("x");
-                int y = tileEntity.getInt("y");
-                int z = tileEntity.getInt("z");
-                this.sections[y >> 4].setTileEntity(x & 0xF, y & 0xF, z & 0xF, AllocatedNBTHelper.toNormalAndRelease(tileEntity));
-            }
-            tileEntities.list().clear();
+//            ListTag<CompoundTag> tileEntities = levelTag.getList("TileEntities", CompoundTag.class);
+//            for (CompoundTag tileEntity : tileEntities) {
+//                int x = tileEntity.getInt("x");
+//                int y = tileEntity.getInt("y");
+//                int z = tileEntity.getInt("z");
+//                this.sections[y >> 4].setTileEntity(x & 0xF, y & 0xF, z & 0xF, AllocatedNBTHelper.toNormalAndRelease(tileEntity));
+//            }
+//            tileEntities.list().clear();
 
-            //TODO: i should probably make entities be their own thing, because 1.17 stores them separately
-            ListTag<CompoundTag> entities = levelTag.getList("Entities", CompoundTag.class);
-            for (CompoundTag entity : entities) {
-                ListTag<DoubleTag> pos = entity.getList("Pos", DoubleTag.class);
-                double y = pos.list().get(1).doubleValue();
-                //TODO: entities might be in an empty chunk section
-                this.sections[clamp(floorI(y) >> 4, 0, 15)].addEntity(AllocatedNBTHelper.toNormalAndRelease(entity));
-            }
-            entities.list().clear();
+//            //TODO: i should probably make entities be their own thing, because 1.17 stores them separately
+//            ListTag<CompoundTag> entities = levelTag.getList("Entities", CompoundTag.class);
+//            for (CompoundTag entity : entities) {
+//                ListTag<DoubleTag> pos = entity.getList("Pos", DoubleTag.class);
+//                double y = pos.list().get(1).doubleValue();
+//                //TODO: entities might be in an empty chunk section
+//                this.sections[clamp(floorI(y) >> 4, 0, 15)].addEntity(AllocatedNBTHelper.toNormalAndRelease(entity));
+//            }
+//            entities.list().clear();
         }
 
         @Override

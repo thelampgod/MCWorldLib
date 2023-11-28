@@ -64,6 +64,7 @@ public interface Section extends LightAccess, IntHolderXYZ, RefCounted {
 
     /**
      * @return the {@link NibbleArray} used by this section for storing block light data
+     * @throws UnsupportedOperationException if this section does not have block light (see {@link #hasSkyLight()})
      */
     NibbleArray blockLightStorage();
 

@@ -79,7 +79,9 @@ public abstract class AbstractSection extends AbstractRefCounted implements Sect
 
     @Override
     protected void doRelease() {
-        this.blockLight.release();
+        if (this.blockLight != null) {
+            this.blockLight.release();
+        }
         if (this.skyLight != null) {
             this.skyLight.release();
         }
@@ -118,7 +120,11 @@ public abstract class AbstractSection extends AbstractRefCounted implements Sect
 
     @Override
     public NibbleArray blockLightStorage() {
-        return this.blockLight;
+        if (this.blockLight != null) {
+            return this.blockLight;
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     //
@@ -129,12 +135,16 @@ public abstract class AbstractSection extends AbstractRefCounted implements Sect
 
     @Override
     public int getBlockLight(int x, int y, int z) {
-        return this.blockLight.get(x, y, z);
+        return this.blockLight != null ? this.blockLight.get(x, y, z) : 0;
     }
 
     @Override
     public void setBlockLight(int x, int y, int z, int level) {
-        this.blockLight.set(x, y, z, level);
+        if (this.blockLight != null) {
+            this.blockLight.set(x, y, z, level);
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override

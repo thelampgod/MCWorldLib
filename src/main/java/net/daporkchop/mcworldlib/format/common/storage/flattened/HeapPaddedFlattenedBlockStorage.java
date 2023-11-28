@@ -25,6 +25,7 @@ import net.daporkchop.lib.binary.bit.BitArray;
 import net.daporkchop.lib.binary.bit.padded.PaddedBitArray;
 import net.daporkchop.lib.common.math.PMath;
 import net.daporkchop.lib.common.pool.array.ArrayAllocator;
+import net.daporkchop.mcworldlib.format.java.storage.NullablePaddedBitArray;
 import net.daporkchop.mcworldlib.util.palette.state.StatePalette;
 import net.daporkchop.mcworldlib.world.storage.BlockStorage;
 import net.daporkchop.mcworldlib.world.storage.FlattenedBlockStorage;
@@ -45,11 +46,12 @@ public class HeapPaddedFlattenedBlockStorage extends AbstractHeapFlattenedBlockS
         super(alloc);
     }
 
-    public HeapPaddedFlattenedBlockStorage(@NonNull PaddedBitArray array, @NonNull StatePalette palette) {
+    public HeapPaddedFlattenedBlockStorage(@NonNull BitArray array, @NonNull StatePalette palette) {
         super(array, palette);
     }
 
-    public HeapPaddedFlattenedBlockStorage(ArrayAllocator<long[]> alloc, @NonNull PaddedBitArray array, @NonNull StatePalette palette) {
+
+    public HeapPaddedFlattenedBlockStorage(ArrayAllocator<long[]> alloc, @NonNull BitArray array, @NonNull StatePalette palette) {
         super(alloc, array, palette);
     }
 

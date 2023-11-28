@@ -98,6 +98,9 @@ public class AnvilWorldStorage extends AbstractJavaWorldStorage {
 
     @Override
     public Section loadSection(int x, int y, int z) throws IOException {
+        if (y < 0) {
+            y += 24;
+        }
         return this.cachedChunks.computeIfAbsent(BinMath.packXY(x, z), this.loadFunction).section(y);
     }
 

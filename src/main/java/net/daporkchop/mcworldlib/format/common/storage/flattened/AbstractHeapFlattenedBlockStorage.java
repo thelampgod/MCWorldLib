@@ -88,6 +88,9 @@ public abstract class AbstractHeapFlattenedBlockStorage extends AbstractBlockSto
 
     @Override
     public BlockState getBlockState(int x, int y, int z) {
+        if (array == null) {
+            return this.palette.idToState(0);
+        }
         return this.palette.idToState(this.array.get(index(x, y, z)));
     }
 
